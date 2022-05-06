@@ -1,4 +1,4 @@
-import { IDBDepartment, IDBBranch, IDBUserPosition, IDBStaff, IAPIResponseCollection } from '/project/globalInterface'
+import { IDBDepartment, IDBBranch, IDBUserPosition, IAPIResponseCollection } from '/project/globalInterface'
 import { store } from '../Reducer'
 import { UserServices } from './Users.services'
 
@@ -16,7 +16,7 @@ export function initializeApp(){
     store.dispatch({ 'type': 'DOWNLOAD_USER_LIST_SUCCESS2', payload: { 
       users: user.Resources, 
       totalPage: user.totalPages,
-      itemperPage: user.itemperPage,
+      itemperPage: user.itemPerPage,
       selectedPage: user.selectedPage
     }})
   })

@@ -3,10 +3,10 @@ import {
   IAuthenticationAction, 
   pageActions, 
   IOpennetResourceState, TAppActions,
-  IDBStaff, Action_Staff, IUserPermission, IModalState, ModalActions
+  IDBStaff, Action_Staff, IUserPermission
 } from '/project/globalInterface'
 
-import { defaultAuthState, OpennetResourceState, defaultModalState } from '/project/globalConstants'
+import { defaultAuthState, OpennetResourceState } from '/project/globalConstants'
 
 export function auth(state = defaultAuthState, actions: IAuthenticationAction): AuthenticationState{
   switch(actions.type){
@@ -73,43 +73,43 @@ export function permissions(state = defaultPermissions,actions: Action_Staff): I
   }
 }
 
-export function modal(state = defaultModalState, actions: ModalActions): IModalState {
-  switch(actions.type){
-    case "CloseModal": { return defaultModalState }
-    case "OpenModal": {
-      return { 
-        ...state, ...actions.payload, open: true,
-      }
-    }
-    case "Confirmed": {
-      console.log(actions)
-      return {
-        ...state, 
-        confirmedState: {
-          ok: true,
-          actionID: actions.actionID
-        },
-      }
-    }
-    case "APIDispatchError": {
-      return {
-        ...state,
-        confirmedState: {
-          ...state.confirmedState,
-          ok: false,
-        },
-        title: "API Dispatch Error",
-        message: {
-          type: "string", content: actions.payload.err
-        },
-        buttons: [
-          { type: "cancel", text: "Cancel" },
-        ]
-      }
-    }
-    default: return state
-  }
-}
+// export function modal(state = defaultModalState, actions: ModalActions): IModalState {
+//   switch(actions.type){
+//     case "CloseModal": { return defaultModalState }
+//     case "OpenModal": {
+//       return { 
+//         ...state, ...actions.payload, open: true,
+//       }
+//     }
+//     case "Confirmed": {
+//       console.log(actions)
+//       return {
+//         ...state, 
+//         confirmedState: {
+//           ok: true,
+//           actionID: actions.actionID
+//         },
+//       }
+//     }
+//     case "APIDispatchError": {
+//       return {
+//         ...state,
+//         confirmedState: {
+//           ...state.confirmedState,
+//           ok: false,
+//         },
+//         title: "API Dispatch Error",
+//         message: {
+//           type: "string", content: actions.payload.err
+//         },
+//         buttons: [
+//           { type: "cancel", text: "Cancel" },
+//         ]
+//       }
+//     }
+//     default: return state
+//   }
+// }
 
 export interface IAppState {
   appState: "INITIALIZING" | "READY" | "AUTHENTICATING"

@@ -1,4 +1,4 @@
-import { IAuthenticationSuccessResponse } from '/project/globalInterface'
+import { IAPIAuthedContext } from '/project/globalInterface'
 import { store } from '../Reducer'
 
 const failed = (message:string) => {
@@ -17,7 +17,7 @@ function authenticate(username: string, password: string){
     })
   })
   .then(res => { 
-    if(res.ok) return res.json().then(res => res as IAuthenticationSuccessResponse)
+    if(res.ok) return res.json().then(res => res as IAPIAuthedContext)
                                 .then(user => { 
                                   store.dispatch({ type: "UPDATE_APP_STATE", payload: "INITIALIZING" })
                                   store.dispatch({ type: 'USER_LOGIN_SUCCESS', payload: user })
@@ -35,7 +35,7 @@ function verifycookie(){
     { method: "GET" }
   )
   .then(res => {
-    if(res.ok) return res.json().then(res => res as IAuthenticationSuccessResponse)
+    if(res.ok) return res.json().then(res => res as IAPIAuthedContext)
                                 .then(user => {
                                   store.dispatch({ type: "UPDATE_APP_STATE", payload: "INITIALIZING" })
                                   store.dispatch({ type: 'USER_LOGIN_SUCCESS', payload: user }) 
